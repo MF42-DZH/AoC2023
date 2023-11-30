@@ -1,0 +1,9 @@
+# Junk files.
+/dist-newstyle
+*.exe
+*.out
+*.hi
+
+# Format inputs as day[NUMBER].txt.
+# Example: day1.txt
+input/*.txt
