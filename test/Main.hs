@@ -1,33 +1,36 @@
 module Main ( main ) where
 
-import AoC.Day.Day1T
-import AoC.Day.Day2T
-import AoC.Day.Day3T
-import AoC.Day.Day4T
-import AoC.Day.Day5T
-import AoC.Day.Day6T
-import AoC.Day.Day7T
-import AoC.Day.Day8T
-import AoC.Day.Day9T
-import AoC.Day.Day10T
-import AoC.Day.Day11T
-import AoC.Day.Day12T
-import AoC.Day.Day13T
-import AoC.Day.Day14T
-import AoC.Day.Day15T
-import AoC.Day.Day16T
-import AoC.Day.Day17T
-import AoC.Day.Day18T
-import AoC.Day.Day19T
-import AoC.Day.Day20T
-import AoC.Day.Day21T
-import AoC.Day.Day22T
-import AoC.Day.Day23T
-import AoC.Day.Day24T
-import AoC.Day.Day25T
+import AoC.Day.Day1T ( day1T )
+import AoC.Day.Day2T ( day2T )
+import AoC.Day.Day3T ( day3T )
+import AoC.Day.Day4T ( day4T )
+import AoC.Day.Day5T ( day5T )
+import AoC.Day.Day6T ( day6T )
+import AoC.Day.Day7T ( day7T )
+import AoC.Day.Day8T ( day8T )
+import AoC.Day.Day9T ( day9T )
+import AoC.Day.Day10T ( day10T )
+import AoC.Day.Day11T ( day11T )
+import AoC.Day.Day12T ( day12T )
+import AoC.Day.Day13T ( day13T )
+import AoC.Day.Day14T ( day14T )
+import AoC.Day.Day15T ( day15T )
+import AoC.Day.Day16T ( day16T )
+import AoC.Day.Day17T ( day17T )
+import AoC.Day.Day18T ( day18T )
+import AoC.Day.Day19T ( day19T )
+import AoC.Day.Day20T ( day20T )
+import AoC.Day.Day21T ( day21T )
+import AoC.Day.Day22T ( day22T )
+import AoC.Day.Day23T ( day23T )
+import AoC.Day.Day24T ( day24T )
+import AoC.Day.Day25T ( day25T )
 import Control.Monad.Trans.Class ( lift )
 import System.Console.Haskeline
 import Text.Read ( readMaybe )
+
+-- Writing tests:
+-- https://hspec.github.io/writing-specs.html
 
 main :: IO ()
 main = runInputT defaultSettings getDay
