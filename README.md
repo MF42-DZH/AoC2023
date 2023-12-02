@@ -1,7 +1,7 @@
 # AoC2023
 
 [Advent of Code 2023](https://adventofcode.com/2023/) solutions in Haskell (on GHC 9.8.1). Ideally this would be run without
-any extra dependencies other than the included dependencies with GHC and GHCi (and `hspec`) for unit testing.
+any extra dependencies other than the included dependencies with GHC and GHCi (and `hspec` for unit testing).
 
 ## How to run
 

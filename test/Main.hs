@@ -48,7 +48,7 @@ main = runInputT defaultSettings $ do
         Nothing -> outputStrLn "No input found." >> getDay
         Just d  -> case readMaybe d :: Maybe Int of
           Nothing  -> outputStrLn "Invalid input. Must be an integer between 1 and 25." >> getDay
-          Just day -> lift (specs !! day)
+          Just day -> lift (specs !! (day - 1))
 
     specs =
       [  day1T,  day2T,  day3T,  day4T,  day5T
