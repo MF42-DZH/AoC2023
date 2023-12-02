@@ -2,7 +2,7 @@
 
 module AoC.Day.Class ( Solution, notImplemented, solution, solutionRaw, submit ) where
 
-type Solution       = String -> IO SolutionOf
+type Solution = String -> IO SolutionOf
 
 data Showable where
   Showable :: forall a . Show a => a -> Showable
