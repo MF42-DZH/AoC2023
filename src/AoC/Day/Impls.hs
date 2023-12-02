@@ -53,4 +53,4 @@ allSolutions 22 = day22
 allSolutions 23 = day23
 allSolutions 24 = day24
 allSolutions 25 = day25
-allSolutions _  = (\ _ -> return "Please input a valid day (1-25).")
+allSolutions _  = (\ _ -> solutionRaw "Please input a valid day (1-25).")

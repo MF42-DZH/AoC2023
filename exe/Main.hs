@@ -16,4 +16,4 @@ main = runInputT defaultSettings getDay
         Nothing -> outputStrLn "No input found." >> getDay
         Just d  -> case readMaybe d :: Maybe Int of
           Nothing  -> outputStrLn "Invalid input. Must be an integer between 1 and 25." >> getDay
-          Just day -> lift (allSolutions day =<< loadInput day) >>= outputStrLn
+          Just day -> lift (allSolutions day =<< loadInput day) >>= outputStrLn . show

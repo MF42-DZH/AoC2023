@@ -11,7 +11,7 @@ day1 input =
       digitsIn1 = process1 False allLines
       digitsIn2 = process1 True allLines
   in  do
-    return $ unlines $ fmap show [digitsIn1, digitsIn2]
+    solution $ fmap submit [digitsIn1, digitsIn2]
 
 fnl :: [a] -> [a]
 fnl l = head l : [last l]

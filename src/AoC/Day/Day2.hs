@@ -12,7 +12,7 @@ day2 input = let allLines        = lines input
                  p1Sum           = sum (gId <$> p1Possible)
                  p2Powers        = (power . gCubes) <$> allGames
                  p2Sum           = sum p2Powers
-             in  return $ unlines $ [show p1Sum, show p2Sum]
+             in  solution $ fmap submit [p1Sum, p2Sum]
 
 part1limits :: (Int, Int, Int)
 part1limits = (12, 13, 14)
