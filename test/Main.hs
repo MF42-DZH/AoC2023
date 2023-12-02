@@ -45,8 +45,8 @@ main = runInputT defaultSettings $ do
     getDay = do
       input <- getInputLine "Enter day number for test (1-25; assuming input is present): "
       case input of
-        Nothing           -> outputStrLn "No input found." >> getDay
-        Just d            -> case readMaybe d :: Maybe Int of
+        Nothing -> outputStrLn "No input found." >> getDay
+        Just d  -> case readMaybe d :: Maybe Int of
           Nothing  -> outputStrLn "Invalid input. Must be an integer between 1 and 25." >> getDay
           Just day -> lift (specs !! day)
 
