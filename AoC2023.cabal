@@ -52,11 +52,35 @@ extra-doc-files:    CHANGELOG.md
 -- extra-source-files:
 
 common warnings
-    ghc-options: -Wall
+    -- Common warning flags.
+    ghc-options: -Wall -Wextra
+
+common shared-props
+    -- Other library packages from which modules are imported.
+    build-depends:
+        base ^>=4.19.0.0,
+        array ^>=0.5.6.0,
+        binary ^>=0.8.9.1,
+        bytestring ^>= 0.12.0.2,
+        containers ^>=0.6.8,
+        deepseq ^>= 1.5.0.0,
+        directory ^>=1.3.8.1,
+        exceptions ^>= 0.10.7,
+        haskeline ^>= 0.8.2.1,
+        mtl ^>=2.3.1,
+        stm ^>=2.5.2.1,
+        template-haskell ^>=2.21.0.0,
+        text ^>=2.1,
+        time ^>=1.12.2,
+        transformers ^>=0.6.1.0
+
+    -- Base language which the package is written in.
+    default-language: GHC2021
 
 library
-    -- Import common warning flags.
-    import:           warnings
+    import:
+        warnings,
+        shared-props
 
     -- Modules exported by the library.
     exposed-modules:
@@ -89,64 +113,29 @@ library
         AoC.Day.Impls,
         AoC.Util
 
-    -- Modules included in this library but not exported.
-    -- other-modules:
-
-    -- LANGUAGE extensions used by modules in this package.
-    -- other-extensions:
-
-    -- Other library packages from which modules are imported.
     build-depends:
-        base ^>=4.19.0.0,
-        array ^>=0.5.6.0,
-        binary ^>=0.8.9.1,
-        bytestring ^>= 0.12.0.2,
-        containers ^>=0.6.8,
-        deepseq ^>= 1.5.0.0,
-        directory ^>=1.3.8.1,
-        exceptions ^>= 0.10.7,
-        mtl ^>=2.3.1,
-        stm ^>=2.5.2.1,
-        template-haskell ^>=2.21.0.0,
-        text ^>=2.1,
-        time ^>=1.12.2,
-        transformers ^>=0.6.1.0
+        parsec ^>= 3.1.17.0
 
     -- Directories containing source files.
     hs-source-dirs:   src
 
-    -- Base language which the package is written in.
-    default-language: GHC2021
-
 executable AoC2023
     -- Import common warning flags.
-    import:           warnings
+    import:
+        warnings,
+        shared-props
 
     -- .hs or .lhs file containing the Main module.
     main-is:          Main.hs
 
-    -- Modules included in this executable, other than Main.
-    -- other-modules:
-
-    -- LANGUAGE extensions used by modules in this package.
-    -- other-extensions:
-
-    -- Other library packages from which modules are imported.
-    build-depends:
-        base ^>=4.19.0.0,
-        haskeline ^>= 0.8.2.1,
-        transformers ^>=0.6.1.0,
-        AoC2023
-
     -- Directories containing source files.
     hs-source-dirs:   exe
 
-    -- Base language which the package is written in.
-    default-language: Haskell2010
-
 test-suite AoC2023-test
     -- Import common warning flags.
-    import:           warnings
+    import:
+        warnings,
+        shared-props
 
     -- Base language which the package is written in.
     default-language: Haskell2010
@@ -179,9 +168,6 @@ test-suite AoC2023-test
         AoC.Day.Day24T,
         AoC.Day.Day25T
 
-    -- LANGUAGE extensions used by modules in this package.
-    -- other-extensions:
-
     -- The interface type and version of the test suite.
     type:             exitcode-stdio-1.0
 
@@ -193,8 +179,5 @@ test-suite AoC2023-test
 
     -- Test dependencies.
     build-depends:
-        base ^>=4.19.0.0,
-        haskeline ^>= 0.8.2.1,
         hspec ^>=2.11.7,
-        transformers ^>=0.6.1.0,
         AoC2023
