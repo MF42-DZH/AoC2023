@@ -46,10 +46,7 @@ category:           Puzzle
 build-type:         Simple
 
 -- Extra doc files to be distributed with the package, such as a CHANGELOG or a README.
-extra-doc-files:    CHANGELOG.md
-
--- Extra source files to be distributed with the package, such as examples, or a tutorial module.
--- extra-source-files:
+extra-doc-files:    README.md
 
 common warnings
     -- Common warning flags.
@@ -130,6 +127,10 @@ executable AoC2023
 
     -- Directories containing source files.
     hs-source-dirs:   exe
+    
+    -- Executable depends on library.
+    build-depends:
+        AoC2023
 
 test-suite AoC2023-test
     -- Import common warning flags.
