@@ -43,7 +43,7 @@ main = runInputT defaultSettings $ do
   where
     getDay :: InputT IO ()
     getDay = do
-      input <- getInputLine "Enter day number for test (1-25; assuming input is present): "
+      input <- getInputLine "Enter day number for test (1-25): "
       case input of
         Nothing -> outputStrLn "No input found." >> getDay
         Just d  -> case readMaybe d :: Maybe Int of
