@@ -71,6 +71,9 @@ common shared-props
         time ^>=1.12.2,
         transformers ^>=0.6.1.0
 
+    -- Enable multithreading.
+    ghc-options: -threaded -rtsopts
+
     -- Base language which the package is written in.
     default-language: GHC2021
 
@@ -109,6 +112,10 @@ library
         AoC.Day.Day25,
         AoC.Day.Impls,
         AoC.Util
+
+    -- Modules included in this executable, other than Main.
+    other-modules:
+        Control.Monad.Freer
 
     build-depends:
         parsec ^>= 3.1.17.0
