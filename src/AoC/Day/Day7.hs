@@ -11,13 +11,12 @@ import Data.Maybe ( fromMaybe )
 import Text.ParserCombinators.ReadP
 
 day7 :: Solution
-day7 input = let njGame = ranksValue $ nj $ read input
-                 jGame  = ranksValue $ gwj $ read input
-                 toIntg = fromIntegral :: Int -> Integer
-             in  solution $ fmap submit
-               [ sum $ fmap (uncurry (*)) $ fmap (bimap (toIntg . snd) toIntg) njGame
-               , sum $ fmap (uncurry (*)) $ fmap (bimap (toIntg . snd) toIntg) jGame
-               ]
+day7 input =
+  let njGame = ranksValue $ nj $ read input
+      jGame  = ranksValue $ gwj $ read input
+      toIntg = fromIntegral :: Int -> Integer
+  in  solution $ fmap (submit . sum . fmap (uncurry (*)) . fmap (bimap (toIntg . snd) toIntg))
+    [njGame, jGame]
 
 data Card
   = Joker

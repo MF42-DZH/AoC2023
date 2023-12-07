@@ -2,7 +2,6 @@ module AoC.Day.Day2 where
 
 import AoC.Day.Class
 import AoC.Util
-import Data.Char
 import Text.ParserCombinators.ReadP
 
 day2 :: Solution
