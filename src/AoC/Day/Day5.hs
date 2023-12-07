@@ -82,19 +82,6 @@ splitRange mappings r =
     from (RangeInfo _ ss _)  = ss
     to   (RangeInfo _ ss rs) = ss + rs - 1
 
-newtype Unmap = Unmap { unmap :: Int -> [Int] }
-
-composeUnmap :: Set RangeInfo -> Unmap
-composeUnmap ris = Unmap $ \ n -> case filter (`contains` n) (S.toList ris) of
-  []   -> [n]
-  ris' -> fmap (\ ri -> n - adj ri) ris'
-  where
-    contains ri n = n >= from ri && n <= to ri
-
-    adj  (RangeInfo ds ss _) = ds - ss -- Inverted adjustment.
-    from (RangeInfo ds _ _)  = ds
-    to   (RangeInfo ds _ rs) = ds + rs - 1
-
 newtype Seeds = Seeds { unSeeds :: [Seed] }
 
 seedsP :: ReadP Seeds
