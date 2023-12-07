@@ -158,6 +158,7 @@ handBetP jokers = do
     upgrade _ _ hand     = how (-1) hand
 
 newtype HandWithJokers = HandWithJokers { hbj :: (Hand, Int) }
+  deriving Show
 
 instance {-# OVERLAPPING #-} Read (Hand, Int) where
   readsPrec _ = readP_to_S (handBetP False)
