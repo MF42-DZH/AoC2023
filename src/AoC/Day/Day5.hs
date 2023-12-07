@@ -3,7 +3,7 @@
 module AoC.Day.Day5 where
 
 import AoC.Day.Class
-import AoC.Day.Day4 ( intP, intsP )
+import AoC.Util
 import Control.Arrow ( (>>>) )
 import Control.Monad ( (<=<) )
 import Control.Monad.Freer

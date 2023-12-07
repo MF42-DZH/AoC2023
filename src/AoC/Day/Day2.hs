@@ -1,6 +1,7 @@
 module AoC.Day.Day2 where
 
 import AoC.Day.Class
+import AoC.Util
 import Data.Char
 import Text.ParserCombinators.ReadP
 
@@ -82,6 +83,3 @@ cubesP = Cubes <$> ((,) <$> (intP <* skipSpaces) <*> colourP)
 
 colourP :: ReadP Colour
 colourP = choice [Red <$ string "red", Green <$ string "green", Blue <$ string "blue"]
-
-intP :: ReadP Int
-intP = read <$> many (satisfy isDigit)

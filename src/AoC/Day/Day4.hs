@@ -1,7 +1,7 @@
 module AoC.Day.Day4 where
 
 import AoC.Day.Class
-import Data.Char
+import AoC.Util
 import Data.Map ( Map )
 import qualified Data.Map as M
 import Data.Set ( Set )
@@ -27,11 +27,7 @@ instance Eq ScratchCard where
 instance Ord ScratchCard where
   c1 <= c2 = cid c1 <= cid c2
 
-intsP :: ReadP [Int]
-intsP = sepBy1 intP (satisfy isSpace *> skipSpaces)
 
-intP :: ReadP Int
-intP = read <$> many1 (satisfy isDigit)
 
 cardP :: ReadP ScratchCard
 cardP = do

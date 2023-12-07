@@ -11,10 +11,12 @@ import Control.Concurrent
   , MVar
   )
 import Control.Monad ( void )
+import Data.Char
 import Data.Map ( Map )
 import qualified Data.Map as M
 import GHC.Exception ( throw )
 import System.Directory ( doesFileExist )
+import Text.ParserCombinators.ReadP
 
 loadInput :: Int -> IO String
 loadInput day = do
@@ -51,3 +53,15 @@ joinHandle_ = void . joinHandle
 
 joinTid :: JoinHandle a -> ThreadId
 joinTid (JH (tid, _)) = tid
+
+count :: Foldable f => (a -> Bool) -> f a -> Int
+count predicate = foldr (\ x c -> if predicate x then c + 1 else c) 0
+
+oneOrMoreSpaces :: ReadP ()
+oneOrMoreSpaces = satisfy isSpace *> skipSpaces
+
+intsP :: ReadP [Int]
+intsP = sepBy1 intP (satisfy isSpace *> skipSpaces)
+
+intP :: ReadP Int
+intP = read <$> many1 (satisfy isDigit)
