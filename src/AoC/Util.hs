@@ -14,6 +14,7 @@ import Control.Monad ( void )
 import Data.Char
 import Data.Map ( Map )
 import qualified Data.Map as M
+import Debug.Trace
 import GHC.Exception ( throw )
 import System.Directory ( doesFileExist )
 import Text.ParserCombinators.ReadP
@@ -65,3 +66,9 @@ intsP = sepBy1 intP (satisfy isSpace *> skipSpaces)
 
 intP :: ReadP Int
 intP = read <$> many1 (satisfy isDigit)
+
+trc :: Show a => a -> a
+trc x = trace (show x) x
+
+trcf :: Show a => [a] -> [a]
+trcf xs = trace (unlines (fmap show xs)) xs
