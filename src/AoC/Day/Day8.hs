@@ -8,6 +8,7 @@ import AoC.Util ( oneOrMoreSpaces )
 import Data.Char ( isAlphaNum )
 import Data.Graph ( graphFromEdges, vertices, Graph, Vertex )
 import Data.List ( foldl1' )
+import Data.MonoidImpls ( LCM(..) )
 import Text.ParserCombinators.ReadP
 
 day8 :: Solution
@@ -85,9 +86,3 @@ newtype Input = Input { getParsed :: ([Instruction], DesertMap) }
 
 instance Read Input where
   readsPrec _ = readP_to_S (Input <$> ((,) <$> instrP <*> (skipSpaces *> graphP)))
-
-newtype LCM a = LCM { getLCM :: a }
-  deriving (Eq, Ord, Show)
-
-instance Integral a => Semigroup (LCM a) where
-  (LCM a) <> (LCM b) = LCM (lcm a b)

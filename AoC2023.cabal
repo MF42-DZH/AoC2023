@@ -71,9 +71,6 @@ common shared-props
         time ^>=1.12.2,
         transformers ^>=0.6.1.0
 
-    -- Enable multithreading.
-    ghc-options: -threaded -rtsopts
-
     -- Base language which the package is written in.
     default-language: GHC2021
 
@@ -111,7 +108,9 @@ library
         AoC.Day.Day24,
         AoC.Day.Day25,
         AoC.Day.Impls,
-        AoC.Util
+        AoC.Util,
+        Data.ASemigroup,
+        Data.MonoidImpls
 
     -- Modules included in this executable, other than Main.
     other-modules:
@@ -134,9 +133,12 @@ executable AoC2023
     -- .hs or .lhs file containing the Main module.
     main-is:          Main.hs
 
+    -- Enable multithreading.
+    ghc-options: -threaded -rtsopts
+
     -- Directories containing source files.
     hs-source-dirs:   exe
-    
+
     -- Executable depends on library.
     build-depends:
         AoC2023
@@ -186,6 +188,9 @@ test-suite AoC2023-test
 
     -- The entrypoint to the test suite.
     main-is:          Main.hs
+
+    -- Enable multithreading.
+    ghc-options: -threaded -rtsopts
 
     -- Test dependencies.
     build-depends:

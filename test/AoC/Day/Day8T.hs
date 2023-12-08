@@ -1,6 +1,7 @@
 module AoC.Day.Day8T ( day8T ) where
 
 import AoC.Day.Day8
+import Data.MonoidImpls
 import Test.Hspec
 
 testCase1 :: String
