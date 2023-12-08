@@ -53,7 +53,6 @@ engineP = skipW >> many parts >> getState
     skipW = skipMany (satisfy (\ c -> c == '.' || isSpace c))
     parts = (symP <|> mPartP) >> skipW
 
-
 findPossible :: String -> LookState
 findPossible engine = case runP engineP (M.empty, []) "Engine" engine of
   Left err -> error (showErrorMessages "Or:" "Unk:" "Exp:" "UnExp:" "EOF" (errorMessages err))
