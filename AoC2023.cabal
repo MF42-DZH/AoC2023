@@ -71,6 +71,9 @@ common shared-props
         time ^>=1.12.2,
         transformers ^>=0.6.1.0
 
+    -- Enable full error spans.
+    ghc-options: -ferror-spans
+
     -- Base language which the package is written in.
     default-language: GHC2021
 

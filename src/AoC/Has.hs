@@ -2,8 +2,10 @@
 
 module AoC.Has where
 
-import qualified Control.Monad.Trans.State.Lazy as SL
-import qualified Control.Monad.Trans.State.Strict as SS
+import Data.Bifunctor
+import Control.Monad.Reader
+import qualified Control.Monad.State as S
+import qualified Control.Monad.Writer as W
 
 class HasView t v where
   viewV :: t -> v
@@ -13,32 +15,53 @@ class HasPut t v where
 
 class (HasView t v, HasPut t v) => Has t v
 
-lgetH :: (Monad m, HasView t v) => SL.StateT t m v
-lgetH = SL.gets viewV
+readerH :: (MonadReader t m, HasView t v) => (v -> a) -> m a
+readerH f = f . viewV <$> ask
 
-lputH :: (Monad m, HasPut t v) => v -> SL.StateT t m ()
-lputH v = SL.modify (putV v)
+askH :: (MonadReader t m, HasView t v) => m v
+askH = viewV <$> ask
 
-lput'H :: (Monad m, HasPut t v) => v -> SL.StateT t m ()
-lput'H v = SL.modify' (putV v)
+localH :: (MonadReader t m, Has t v) => (v -> v) -> m a -> m a
+localH f = local (\ t -> putV (f (viewV t)) t)
 
-lmodifyH :: (Monad m, Has t v) => (v -> v) -> SL.StateT t m ()
-lmodifyH f = SL.modify (\ t -> putV (f (viewV t)) t)
+asksH :: (MonadReader t m, HasView t v) => (v -> a) -> m a
+asksH f = asks (f . viewV)
 
-lmodify'H :: (Monad m, Has t v) => (v -> v) -> SL.StateT t m ()
-lmodify'H f = SL.modify' (\ t -> putV (f (viewV t)) t)
+stateH :: (S.MonadState t m, Has t v) => (v -> (a, v)) -> m a
+stateH f = S.state (\ t -> let (a, v) = f (viewV t) in (a, putV v t))
 
-sgetH :: (Monad m, HasView t v) => SS.StateT t m v
-sgetH = SS.gets viewV
+getH :: (S.MonadState t m, HasView t v) => m v
+getH = viewV <$> S.get
 
-sputH :: (Monad m, HasPut t v) => v -> SS.StateT t m ()
-sputH v = SS.modify (putV v)
+putH :: (S.MonadState t m, HasPut t v) => v -> m ()
+putH v = S.modify (putV v)
 
-sput'H :: (Monad m, HasPut t v) => v -> SS.StateT t m ()
-sput'H v = SS.modify' (putV v)
+put'H :: (S.MonadState t m, HasPut t v) => v -> m ()
+put'H v = S.modify' (putV v)
 
-smodifyH :: (Monad m, Has t v) => (v -> v) -> SS.StateT t m ()
-smodifyH f = SS.modify (\ t -> putV (f (viewV t)) t)
+modifyH :: (S.MonadState t m, Has t v) => (v -> v) -> m ()
+modifyH f = S.modify (\ t -> putV (f (viewV t)) t)
 
-smodify'H :: (Monad m, Has t v) => (v -> v) -> SS.StateT t m ()
-smodify'H f = SS.modify' (\ t -> putV (f (viewV t)) t)
+modify'H :: (S.MonadState t m, Has t v) => (v -> v) -> m ()
+modify'H f = S.modify' (\ t -> putV (f (viewV t)) t)
+
+getsH :: (S.MonadState t m, HasView t v) => (v -> a) -> m a
+getsH f = S.gets (f . viewV)
+
+writerH :: (W.MonadWriter t m, HasPut t v) => (a, v) -> m a
+writerH (a, v) = W.pass (pure (a, putV v))
+
+tellH :: (W.MonadWriter t m, HasPut t v) => v -> m ()
+tellH v = writerH ((), v)
+
+listenH :: (W.MonadWriter t m, HasView t v) => m a -> m (a, v)
+listenH = fmap (second viewV) . W.listen
+
+passH :: (W.MonadWriter t m, Has t v) => m (a, v -> v) -> m a
+passH = W.pass . fmap (second (\ vf t -> putV (vf (viewV t)) t))
+
+listensH :: (W.MonadWriter t m, HasView t v) => (v -> b) -> m a -> m (a, b)
+listensH f = W.listens (f . viewV)
+
+censorH :: (W.MonadWriter t m, Has t v) => (v -> v) -> m a -> m a
+censorH f = W.censor (\ t -> putV (f (viewV t)) t)

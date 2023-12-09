@@ -1,4 +1,4 @@
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE LambdaCase, QuantifiedConstraints #-}
 
 module AoC.Util where
 
@@ -11,12 +11,14 @@ import Control.Concurrent
   , MVar
   )
 import Control.Monad ( void )
+import Data.Bifunctor
 import Data.Char
 import Data.Map ( Map )
 import qualified Data.Map as M
 import qualified Data.Sequence as Seq
 import Debug.Trace
 import GHC.Exception ( throw )
+import GHC.Generics
 import System.Directory ( doesFileExist )
 import Text.ParserCombinators.ReadP
 
@@ -91,3 +93,25 @@ shead (x Seq.:<| _) = x
 slast :: Seq.Seq a -> a
 slast Seq.Empty     = error "Empty Seq."
 slast (_ Seq.:|> x) = x
+
+class Swap f where
+  swap :: f a b -> f b a
+
+instance Swap (,) where
+  swap (x, y) = (y, x)
+
+instance Swap Either where
+  swap (Left x)  = Right x
+  swap (Right x) = Left x
+
+-- Swaps the parameters for a two-variable Functor.
+newtype SwapF f a b = SwapF { unSwapF :: f b a }
+
+instance Bifunctor f => Functor (SwapF f a) where
+  fmap f (SwapF x) = SwapF (first f x)
+  y <$ (SwapF x)   = SwapF (first (const y) x)
+
+instance Bifunctor f => Bifunctor (SwapF f) where
+  bimap f g (SwapF x) = SwapF (bimap g f x)
+  first f (SwapF x)   = SwapF (second f x)
+  second f (SwapF x)  = SwapF (first f x)
