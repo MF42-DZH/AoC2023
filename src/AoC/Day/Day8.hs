@@ -12,14 +12,15 @@ import Data.MonoidImpls ( LCM(..) )
 import Text.ParserCombinators.ReadP
 
 day8 :: Solution
-day8 input = let Input (ins, (g, nVF, vFK)) = read input
-                 ktMN                       = (nVF <$>) . vFK
-                 allAs                      = filter ((== 'A') . last) (sndT . nVF <$> vertices g)
-                 ghosts                     = fmap (\ st -> navigateGhost ins st ktMN) allAs
-             in  solution $ fmap submit
-               [ navigate ins ktMN
-               , getLCM (foldl1' (<>) ghosts)
-               ]
+day8 input =
+  let Input (ins, (g, nVF, vFK)) = read input
+      ktMN                       = (nVF <$>) . vFK
+      allAs                      = filter ((== 'A') . last) (sndT . nVF <$> vertices g)
+      ghosts                     = fmap (\ st -> navigateGhost ins st ktMN) allAs
+  in  solution $ fmap submit
+    [ navigate ins ktMN
+    , getLCM (foldl1' (<>) ghosts)
+    ]
   where
     sndT (_, s, _) = s
 

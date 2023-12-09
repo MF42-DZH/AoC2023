@@ -60,12 +60,12 @@ day8T = hspec $ do
       ktMN2 "BBB" `shouldBe` Just ((), "BBB", ["AAA", "ZZZ"])
       ktMN2 "ZZZ" `shouldBe` Just ((), "ZZZ", ["ZZZ", "ZZZ"])
 
-  describe "the navigator" $
+  describe "the navigator" $ do
     it "should return the correct amount of steps from AAA to ZZZ" $ do
       navigate i1 ktMN1 `shouldBe` 2
       navigate i2 ktMN2 `shouldBe` 6
   
-  describe "ghost navigation" $
+  describe "ghost navigation" $ do
     it "should return the LCM of two ghosts navigating from all -A nodes" $ do
       let lcm11A = navigateGhost iG "11A" ktMNG
           lcm22A = navigateGhost iG "22A" ktMNG
