@@ -1,6 +1,7 @@
 module AoC.Day.Day9T ( day9T ) where
 
 import AoC.Day.Day9
+import AoC.Util ( shead, slast )
 import qualified Data.Sequence as S
 import Test.Hspec
 

@@ -1,7 +1,7 @@
 module AoC.Day.Day9 where
 
 import AoC.Day.Class
-import AoC.Util ( pnIntsP )
+import AoC.Util ( pnIntsP, shead, slast, stail )
 import Data.Sequence ( Seq )
 import qualified Data.Sequence as S
 import Text.ParserCombinators.ReadP
@@ -22,18 +22,6 @@ nthDifferenceExt ns
   where
     differences = S.zipWith (-) (stail ns) ns
     recur       = nthDifferenceExt differences
-
-stail :: Seq a -> Seq a
-stail S.Empty      = error "Empty Seq."
-stail (_ S.:<| xs) = xs
-
-shead :: Seq a -> a
-shead S.Empty     = error "Empty Seq."
-shead (x S.:<| _) = x
-
-slast :: Seq a -> a
-slast S.Empty     = error "Empty Seq."
-slast (_ S.:|> x) = x
 
 newtype History = History { getHistory :: Seq Int }
   deriving (Eq, Ord, Show)

@@ -14,6 +14,7 @@ import Control.Monad ( void )
 import Data.Char
 import Data.Map ( Map )
 import qualified Data.Map as M
+import qualified Data.Sequence as Seq
 import Debug.Trace
 import GHC.Exception ( throw )
 import System.Directory ( doesFileExist )
@@ -78,3 +79,15 @@ trc x = trace (show x) x
 
 trcf :: Show a => [a] -> [a]
 trcf xs = trace (unlines (fmap show xs)) xs
+
+stail :: Seq.Seq a -> Seq.Seq a
+stail Seq.Empty      = error "Empty Seq."
+stail (_ Seq.:<| xs) = xs
+
+shead :: Seq.Seq a -> a
+shead Seq.Empty     = error "Empty Seq."
+shead (x Seq.:<| _) = x
+
+slast :: Seq.Seq a -> a
+slast Seq.Empty     = error "Empty Seq."
+slast (_ Seq.:|> x) = x
