@@ -67,6 +67,12 @@ intsP = sepBy1 intP (satisfy isSpace *> skipSpaces)
 intP :: ReadP Int
 intP = read <$> many1 (satisfy isDigit)
 
+pnIntsP :: ReadP [Int]
+pnIntsP = sepBy1 pnIntP (satisfy isSpace *> skipSpaces)
+
+pnIntP :: ReadP Int
+pnIntP = ((negate <$ char '-') +++ pure id) <*> intP
+
 trc :: Show a => a -> a
 trc x = trace (show x) x
 
