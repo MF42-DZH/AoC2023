@@ -11,10 +11,11 @@ day9 input =
   let allLines = lines input
       allHists = fmap (getHistory . read) allLines
       extended = fmap nthDifferenceExt allHists
-  in  solution $ fmap submit [sum (fmap slast extended), sum (fmap shead extended)]
+  in  solution $ fmap (submit . sum . ($ extended) . fmap) [slast, shead]
 
 nthDifferenceExt :: Seq Int -> Seq Int
--- Pre: There is at least 1 item in the sequence.
+-- Pre: There are enough items in the sequence for the order of the polynomial.
+--      This is (p + 2) for an pth-order polynomial.
 nthDifferenceExt ns
   | all (== 0) differences = shead ns S.<| (ns S.|> slast ns)
   | otherwise              = (shead ns - shead recur) S.<| (ns S.|> (slast ns + slast recur))
