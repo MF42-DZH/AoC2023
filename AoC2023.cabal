@@ -110,7 +110,8 @@ library
         AoC.Day.Impls,
         AoC.Util,
         Data.ASemigroup,
-        Data.MonoidImpls
+        Data.MonoidImpls,
+        Data.Remainder
 
     -- Modules included in this executable, other than Main.
     other-modules:
