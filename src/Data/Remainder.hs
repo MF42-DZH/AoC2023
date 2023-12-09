@@ -12,8 +12,7 @@ module Data.Remainder
 
 -- Implementation of Chinese Remainder Theorem for solving systems of modular
 -- equations (x === a_i (mod n_i) for some range [1..i]).
--- This also assumes all n_i are pairwise co-prime.
--- It is recommended that you use Integer.
+-- It is recommended that you use Integer as that is lossless for the modulus.
 
 import Data.List ( foldl' )
 import Data.List.NonEmpty ( NonEmpty( (:|) ))

@@ -18,7 +18,6 @@ import qualified Data.Map as M
 import qualified Data.Sequence as Seq
 import Debug.Trace
 import GHC.Exception ( throw )
-import GHC.Generics
 import System.Directory ( doesFileExist )
 import Text.ParserCombinators.ReadP
 
