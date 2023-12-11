@@ -120,7 +120,8 @@ library
     other-modules:
         AoC.Has,
         AoC.StReadP,
-        Control.Monad.Freer
+        Control.Monad.Freer,
+        Control.Monad.Trans.BiState
 
     build-depends:
         parsec ^>= 3.1.17.0

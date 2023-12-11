@@ -67,7 +67,7 @@ solveMany' eqs =
     Right x -> x
 
 solveManyE :: Integral a => [ModEq a] -> Either String (ModEq a)
-solveManyE= foldl' (\ acc x -> acc >>= (`solveTwoE` x)) (Right mempty)
+solveManyE = foldl' (\ acc x -> acc >>= (`solveTwoE` x)) (Right mempty)
 
 instance Integral a => Semigroup (ModEq a) where
   (<>)              = solveTwo'
